@@ -112,7 +112,6 @@
             <!-- Already registered? Sign In link -->
             <p class="p">Already registered? <a class="span" href="{{ route('login') }}">Sign In</a></p>
         </form>
-
     </div>
 
 
