@@ -156,7 +156,7 @@
     transition: all .3s ease-in-out;
 }
 .product-grid .product-image img:hover{
-  transform: scale(1.09);
+  transform: scale(1.09) translatey(-10px) rotate(-10deg);
 }
 
 .product-grid .add-to-cart {
