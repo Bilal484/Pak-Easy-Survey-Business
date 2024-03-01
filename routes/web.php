@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserStatsController;
 use App\Http\Controllers\ReferralLinkController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
 
@@ -27,5 +28,7 @@ require __DIR__ . '/auth.php';
 
 Route::resource('user-stats', UserStatsController::class);
 
+
+Route::get('/products',[ ProductController::class ,'index']);
 
 
