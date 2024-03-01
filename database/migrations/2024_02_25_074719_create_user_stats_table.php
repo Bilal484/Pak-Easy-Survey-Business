@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('team_size')->default(0);
             $table->decimal('earnings', 10, 2)->default(0.00);
             $table->boolean('referral_status')->default(false);
+            $table->timestamp('last_referral_added_at')->nullable();
             $table->timestamps();
         });
     }
