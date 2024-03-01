@@ -12,103 +12,106 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <style>
-    
+
 </style>
 
 <body>
     <div class="container-fluid products-section">
-    <div class="row text-center product-title p-5">
-        <h1>ALL PRODUCTS </h1>
-    </div>
-    <div class="container">
-        <div class="row p-5">
-            <div class="col-md-4 col-sm-6">
-                <div class="product-grid">
-                    <div class="product-image">
-                        <a href="#" class="image">
-                            <img src="{{ asset('assets/images/watch-band.jpg') }}">
-                           
-                        </a>
+        <div class="row text-center product-title p-5">
+            <h1>ALL PRODUCTS </h1>
+        </div>
+        <div class="container">
+            <div class="row p-5">
+                <div class="col-md-4 col-sm-6">
+                    <div class="product-grid">
+                        <div class="product-image">
+                            <a href="#" class="image">
+                                <img src="{{ asset('assets/images/watch-band.jpg') }}">
 
-                        <a type="button" class="add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Review
-                        </a>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="title"><a href="#">Smart Watch Bands</a></h3>
-                        <div class="price">Watch Bands</div>
+                            </a>
+
+                            <a type="button" class="add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Review
+                            </a>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="title"><a href="#">Smart Watch Bands</a></h3>
+                            <div class="price">Watch Bands</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="product-grid">
-                    <div class="product-image">
-                        <a href="#" class="image">
-                            <img src="{{ asset('assets/images/ring-box.jpg') }}">
-                           
-                        </a>
+                <div class="col-md-4 col-sm-6">
+                    <div class="product-grid">
+                        <div class="product-image">
+                            <a href="#" class="image">
+                                <img src="{{ asset('assets/images/ring-box.jpg') }}">
 
-                        <a type="button" class="add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal">Review</a>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="title"><a href="#">Luxury Gift Box for Rings</a></h3>
-                        <div class="price">Rings Box</div>
+                            </a>
+
+                            <a type="button" class="add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal">Review</a>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="title"><a href="#">Luxury Gift Box for Rings</a></h3>
+                            <div class="price">Rings Box</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 col-sm-6">
-                <div class="product-grid">
-                    <div class="product-image">
-                        <a href="#" class="image">
-                        <img src="{{ asset('assets/images/earbuds.jpg') }}">
+                <div class="col-md-4 col-sm-6">
+                    <div class="product-grid">
+                        <div class="product-image">
+                            <a href="#" class="image">
+                                <img src="{{ asset('assets/images/earbuds.jpg') }}">
 
-                        </a>
+                            </a>
 
-                        <a type="button" class="add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal">Review</a>
-                    </div>
-                    <div class="product-content">
-                        <h3 class="title"><a href="#">Earbuds Pro</a></h3>
-                        <div class="price">Earbuds</div>
+                            <a type="button" class="add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal">Review</a>
+                        </div>
+                        <div class="product-content">
+                            <h3 class="title"><a href="#">Earbuds Pro</a></h3>
+                            <div class="price">Earbuds</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    
+
 
     <!-- Modal -->
     <div class="modal review-modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    
+
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="title text-center">
-                    <h5 class="modal-title" id="exampleModalLabel">welcome to EasyBusinessSurvey its just a little survey about products</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">welcome to EasyBusinessSurvey its just a little survey about products</h5>
                     </div>
-                    <div class="first">
-                    <label for="productPrice">Is this product price reasonable?</label>
-                    <select class="form-select" id="productPrice">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                        <option value="maybe">Maybe</option>
-                    </select>
-                    </div>
-                    <div class="first">
-                    <label for="productPrice">Is this product price reasonable?</label>
-                    <select class="form-select" id="productPrice">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                        <option value="maybe">Maybe</option>
-                    </select>
-                    </div>
+                    <form action="">
+                        <div class="first">
+                            <label for="productPrice">Is this product price reasonable?</label>
+                            <select class="form-select" id="productPrice" required>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                                <option value="maybe">Maybe</option>
+                            </select>
+                        </div>
+                        <div class="first">
+                            <label for="productPrice">Is this product price reasonable?</label>
+                            <select class="form-select" id="productPrice" required>
+                                <option value="yes" >Yes</option>
+                                <option value="no">No</option>
+                                <option value="maybe">Maybe</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                        <a href="" class="w-100"><button type="submit" class="btn btn-orangered">Submit</button>
+                        </a></div>
+                    </form>
                 </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-orangered">Submit</button>
-                </div>
+
             </div>
         </div>
     </div>
