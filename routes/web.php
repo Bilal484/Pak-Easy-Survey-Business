@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserStatsController;
 use App\Http\Controllers\ReferralLinkController;
@@ -29,3 +30,11 @@ Route::resource('user-stats', UserStatsController::class);
 
 
 
+
+
+// Route::get('/reviews/create', 'App\Http\Controllers\ReviewController@create')->name('reviews.create');
+
+Route::get('/reviews', [ReviewController::class, 'index'])->name('review.index');
+// Route for displaying a form to create a new review and submit review earnings
+Route::post('/submit-review', [ReviewController::class, 'submitReview'])->name('submit-review');
+Route::post('/review', [ReviewController::class, 'store'])->name('review.store');
