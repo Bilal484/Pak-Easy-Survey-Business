@@ -46,9 +46,11 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'own_referral_code' => $referralCode,
+            'referral_code' => $request->referral_code,
+
         ]);
 
-        // Create a record in the user_stats table
+
         $userStats = UserStats::create([
             'user_id' => $user->id,
             'own_referral_code' => $referralCode,
@@ -58,32 +60,32 @@ class RegisteredUserController extends Controller
         if ($request->has('referral_code')) {
             $referringUser = User::where('own_referral_code', $request->referral_code)->first();
             if ($referringUser) {
-                // Update the user's stats with the referral code
+
                 $userStats->update([
                     'referral_by' => $referringUser->id,
                 ]);
 
-                // Give earnings to the referring user
+
                 $referringUser->stats()->increment('earnings', 150);
 
-                // Get the parent user
+
                 $referringUserParent = User::find($referringUser->referral_by);
                 if ($referringUserParent) {
-                    // Give earnings to the parent user
+
                     $referringUserParent->stats()->increment('earnings', 100);
 
-                    // Get the second parent user
+
                     $referringUserGrandParent = User::find($referringUserParent->referral_by);
                     if ($referringUserGrandParent) {
-                        // Give earnings to the second parent user
+
                         $referringUserGrandParent->stats()->increment('earnings', 50);
                     }
                 }
 
-                // Increment total_referrals for the referring user
+
                 $referringUser->stats()->increment('total_referrals');
 
-                // Determine the level based on the number of referral members
+
                 $referralCount = $referringUser->stats()->whereNotNull('referral_by')->count();
                 $level = 0;
                 switch ($referralCount) {
@@ -125,7 +127,7 @@ class RegisteredUserController extends Controller
                         break;
                 }
 
-                // Update the level for the referring user
+
                 $referringUser->stats()->update(['level' => $level]);
             }
         }

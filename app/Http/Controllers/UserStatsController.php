@@ -6,12 +6,13 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\UserStats;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserStatsController extends Controller
 {
     public function index()
     {
-        // Implement logic to fetch and return all user stats
+
         $userStats = UserStats::all();
         return view('user-stats.index', ['userStats' => $userStats]);
     }
@@ -34,9 +35,15 @@ class UserStatsController extends Controller
 
     public function show(UserStats $userStats)
     {
-        // Implement logic to show a specific user's stats
-        return view('user-stats.show', ['userStats' => $userStats]);
+
+        $reviewEarnings = $userStats->user->reviews()->count() * 10;
+
+
+        $totalEarnings = $userStats->earnings + $reviewEarnings;
+
+        return view('user-stats.show', ['userStats' => $userStats, 'totalEarnings' => $totalEarnings]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -47,14 +54,14 @@ class UserStatsController extends Controller
     }
     public function update(Request $request, UserStats $userStats)
     {
-        // Implement logic to update user stats
+
         $userStats->update($request->all());
         return redirect()->route('user-stats.index');
     }
 
     public function destroy(UserStats $userStats)
     {
-        // Implement logic to delete user stats
+
         $userStats->delete();
         return redirect()->route('user-stats.index');
     }
@@ -62,24 +69,24 @@ class UserStatsController extends Controller
 
     public function updateEarnings(User $user)
     {
-        // Update earnings for the user and their parent user
+
         $userStats = $user->stats;
 
-        // Check if the user has not referred a new user within the last 7 days
+
         if ($userStats && Carbon::now()->diffInDays($user->created_at) <= 7) {
-            $userStats->increment('earnings', 150); // Give 150 rupees to the user
+            $userStats->increment('earnings', 150);
             $referringUser = User::find($userStats->referral_by);
             if ($referringUser) {
-                $referringUser->stats()->increment('earnings', 100); // Give 100 rupees to the parent user
+                $referringUser->stats()->increment('earnings', 100);
 
-                // Get the second parent user
+
                 $referringUserParent = User::find($referringUser->referral_by);
                 if ($referringUserParent) {
-                    $referringUserParent->stats()->increment('earnings', 50); // Give 50 rupees to the second parent user
+                    $referringUserParent->stats()->increment('earnings', 50);
                 }
             }
         } else {
-            // If user has not referred a new user within 7 days, set earnings to zero
+
             if ($userStats) {
                 $userStats->update(['earnings' => 0]);
             } else {
@@ -91,16 +98,45 @@ class UserStatsController extends Controller
             }
         }
 
+
+        $reviewsEarnings = $user->reviews()->count() * 10;
+        $userStats->increment('earnings', $reviewsEarnings);
+
         return redirect()->route('user-stats.index');
     }
 
+
+
     public function resetEarnings(User $user)
     {
-        // Reset earnings for the user
+
         $userStats = $user->stats;
         if ($userStats) {
             $userStats->update(['earnings' => 0]);
         }
         return redirect()->route('user-stats.index');
     }
+
+
+
+    // Referral user
+
+  
+
+    public function referralUsers()
+    {
+        // Get the referral code of the logged-in user
+        $referralCode = Auth::user()->referral_code;
+
+        // Get all users
+        $allUsers = User::all();
+
+        // Filter users who registered with the user's referral code
+        $referralUsers = $allUsers->filter(function ($user) use ($referralCode) {
+            return $user->referral_code === $referralCode;
+        });
+
+        return view('user-stats.referral-users', compact('referralUsers', 'allUsers'));
+    }
+
 }

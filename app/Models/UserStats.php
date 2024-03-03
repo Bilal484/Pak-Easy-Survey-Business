@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
+use App\Models\Review;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class UserStats extends Model
 {
@@ -23,4 +25,10 @@ class UserStats extends Model
     {
         return $this->belongsTo(User::class, 'referral_by');
     }
+
+    public function reviews()
+{
+    return $this->hasMany(Review::class, 'user_id', 'user_id');
+}
+
 }

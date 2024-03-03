@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'own_referral_code',
+        'referral_code',
     ];
 
     /**
@@ -47,5 +48,11 @@ class User extends Authenticatable
     public function stats()
     {
         return $this->hasOne(UserStats::class);
+    }
+
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }
