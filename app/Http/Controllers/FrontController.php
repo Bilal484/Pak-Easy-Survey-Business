@@ -8,8 +8,18 @@ class FrontController extends Controller
 {
     //
 
-    public Function admin()
+    public function admin()
     {
         return view('front.admin');
+    }
+
+    public function customer()
+    {
+        return view('front.customer');
+    }
+
+    public function user()
+    {
+        return view('front.user');
     }
 }

@@ -36,7 +36,7 @@ Route::get('/products', [ProductController::class, 'index']);
 
 // product
 
-Route::get('/productS', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products-post', [ProductController::class, 'store'])->name('products.store');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
@@ -46,10 +46,15 @@ Route::get('/products/{product}/review', [ProductController::class, 'review'])->
 
 Route::post('products/{product}/review', [ProductReviewController::class, 'store'])->name('products.review.store');
 
-// Route::post('/products/{product}/review', 'ProductReviewController@store')->name('products.review.store');
 
 Route::get('/referral-users', [UserStatsController::class, 'referralUsers'])->name('referral-users');
 
 // Front end routes
 
-Route::get('admin',[FrontController::class ,'admin'])->name('admin');
+Route::get('admin', [FrontController::class, 'admin'])->name('admin');
+Route::get('customer', [FrontController::class, 'customer'])->name('customer');
+Route::get('user', [FrontController::class, 'user'])->name('user');
+
+
+Route::get('/user/earnings', [UserStatsController::class, 'showEarning'])->name('user.earnings');
+
